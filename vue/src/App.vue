@@ -14,10 +14,18 @@
 
 <script>
 import Navigation from '@/components/Navigation'
+import api from './api/api'
+
 export default {
   name: "App",
   components: {
     Navigation
+  },
+  created() {
+    api.getQuestions()
+      .then(({data})=> {
+        console.log(data);
+      }).catch(({message}) => console.log(message));
   }
 }
 </script>
