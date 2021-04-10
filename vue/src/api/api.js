@@ -23,5 +23,35 @@ export default {
      */
     getAnswer(type) {
         return Axios.get(`/answer${type ? '/single' : ''}`);
+    },
+
+    /**
+     * Pass username and password of the user
+     * @param {Object} user 
+     */
+    login(user) {
+        return Axios.post('/login', user);
+    },
+
+    /**
+     * Pass username, email, password and password_confirmation to register a user
+     * @param {Object} user 
+     */
+    register(user) {
+        return Axios.post('/register', user);
+    },
+
+    logout() {
+        return Axios.post('/logout');
+    },
+
+    profile(token) {
+        return Axios.get('/profile', token);
+    },
+    /**
+     * Get csrf token
+     */
+    csrf() {
+        return Axios.get('csrf-cookie')
     }
 }

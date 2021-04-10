@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
@@ -15,5 +16,13 @@ use App\Http\Controllers\QuizController;
 |
 */
 
-Route::get('/questions/{type?}', [QuizController::class, 'questions'])->where('type', 'single');
 Route::get('/answer/{type?}', [QuizController::class, 'answer'])->where('type', 'single');
+Route::get('/questions/{type?}', [QuizController::class, 'questions'])->where('type', 'single');
+
+Route::middleware(['auth:sanctum'])->group(function() {
+    Route::get('/profile', [AuthController::class, 'profile']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);

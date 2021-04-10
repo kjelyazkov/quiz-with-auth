@@ -14,18 +14,18 @@
 
 <script>
 import Navigation from '@/components/Navigation'
-import api from './api/api'
 
 export default {
   name: "App",
   components: {
     Navigation
   },
-  created() {
-    api.getQuestions()
-      .then(({data})=> {
-        console.log(data);
-      }).catch(({message}) => console.log(message));
+  mounted() {
+    if(window.sessionStorage.getItem('token')) {
+      this.$store.dispatch('user/profile');
+    }
+
+    // this.$store.dispatch('user/login');
   }
 }
 </script>
